@@ -1,0 +1,2409 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>體驗實驗室 · Experience Lab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #1B1612; --ink-2: #241E18; --ink-3: #2E2720;
+  --cream: #EDE4D3; --cream-dim: #C9BFAF;
+  --stone: #8B7E6B; --stone-dim: #5C5448;
+  --clay: #A0604A; --madder: #9B3831; --bronze: #B8893F; --gold: #D9BC7A;
+  --border: rgba(237,228,211,0.08);
+  --border-mid: rgba(237,228,211,0.14);
+  --border-strong: rgba(237,228,211,0.22);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--ink); color: var(--cream);
+  font-family: 'Inter', 'Noto Serif TC', sans-serif;
+  line-height: 1.65; -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+.container { max-width: 1240px; margin: 0 auto; padding: 80px 32px 120px; }
+@media (max-width: 640px) { .container { padding: 48px 20px 80px; } }
+
+.eyebrow { font-family: ‘JetBrains Mono’, monospace; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(–stone); }
+.eyebrow .dot { color: var(–madder); margin: 0 10px; }
+
+.section-title { font-family: ‘Noto Serif TC’, serif; font-weight: 500; font-size: clamp(28px, 4vw, 40px); line-height: 1.25; letter-spacing: -0.015em; color: var(–cream); margin-bottom: 16px; }
+.section-title .accent { color: var(–clay); font-style: italic; font-weight: 400; }
+.section-lead { font-family: ‘Noto Serif TC’, serif; font-size: 17px; color: var(–cream-dim); max-width: 720px; line-height: 1.65; margin-bottom: 48px; }
+
+.hero { margin-bottom: 80px; padding-bottom: 64px; border-bottom: 1px solid var(–border); }
+.hero-eyebrow { font-family: ‘JetBrains Mono’, monospace; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(–stone); margin-bottom: 36px; }
+.hero-eyebrow .dot { color: var(–madder); margin: 0 10px; }
+.hero-title { font-family: ‘Noto Serif TC’, serif; font-weight: 500; font-size: clamp(44px, 7vw, 76px); line-height: 1.12; letter-spacing: -0.025em; margin-bottom: 24px; }
+.hero-title .accent { color: var(–clay); font-style: italic; font-weight: 400; }
+.hero-subtitle { font-family: ‘Noto Serif TC’, serif; font-size: clamp(18px, 2.2vw, 24px); color: var(–cream-dim); font-style: italic; margin-bottom: 44px; max-width: 720px; line-height: 1.5; }
+.hero-intro { max-width: 720px; font-size: 15.5px; color: var(–cream-dim); margin-bottom: 56px; }
+.hero-intro p + p { margin-top: 16px; }
+.hero-intro strong { color: var(–gold); font-weight: 500; }
+
+.launch-banner { display: flex; align-items: center; gap: 20px; margin-bottom: 48px; padding: 20px 24px; background: linear-gradient(90deg, rgba(184,137,63,0.08) 0%, rgba(184,137,63,0) 100%); border-left: 3px solid var(–bronze); border-radius: 2px; flex-wrap: wrap; }
+.launch-date { font-family: ‘Noto Serif TC’, serif; font-size: 22px; color: var(–gold); font-weight: 500; letter-spacing: -0.01em; }
+.launch-meta { font-family: ‘JetBrains Mono’, monospace; font-size: 11px; color: var(–bronze); letter-spacing: 0.2em; text-transform: uppercase; }
+.launch-cta { font-family: ‘Noto Serif TC’, serif; font-style: italic; font-size: 15px; color: var(–cream-dim); margin-left: auto; }
+@media (max-width: 640px) { .launch-cta { margin-left: 0; } }
+
+.dna-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; padding-top: 40px; border-top: 1px solid var(–border); }
+.dna-num { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; color: var(–bronze); letter-spacing: 0.28em; margin-bottom: 12px; }
+.dna-title { font-family: ‘Noto Serif TC’, serif; font-size: 18px; color: var(–cream); margin-bottom: 10px; font-weight: 500; }
+.dna-desc { font-size: 13px; color: var(–stone); line-height: 1.7; }
+
+.case-study { margin-bottom: 96px; padding: 56px 48px; background: var(–ink-2); border: 1px solid var(–border-mid); border-radius: 2px; position: relative; }
+@media (max-width: 640px) { .case-study { padding: 40px 28px; } }
+.case-study::before { content: “”; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(–gold); }
+.case-eyebrow { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(–gold); margin-bottom: 24px; }
+.case-title { font-family: ‘Noto Serif TC’, serif; font-weight: 500; font-size: clamp(30px, 4.5vw, 44px); line-height: 1.2; letter-spacing: -0.015em; color: var(–cream); margin-bottom: 12px; }
+.case-title .cn { color: var(–clay); font-style: italic; font-weight: 400; }
+.case-subtitle { font-family: ‘Inter’, sans-serif; font-size: 12px; letter-spacing: 0.12em; color: var(–stone); margin-bottom: 32px; }
+.case-subtitle a { color: var(–bronze); text-decoration: none; border-bottom: 1px solid var(–border-strong); padding-bottom: 1px; transition: all 0.2s; }
+.case-subtitle a:hover { color: var(–gold); border-color: var(–gold); }
+.case-lead { font-family: ‘Noto Serif TC’, serif; font-size: 16px; color: var(–cream-dim); line-height: 1.7; margin-bottom: 40px; max-width: 720px; }
+
+.case-iterations { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; margin-bottom: 40px; border-top: 1px solid var(–border); border-left: 1px solid var(–border); }
+.iteration { padding: 24px 20px; border-right: 1px solid var(–border); border-bottom: 1px solid var(–border); }
+.iter-label { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; color: var(–bronze); letter-spacing: 0.22em; margin-bottom: 8px; }
+.iter-theme { font-family: ‘Noto Serif TC’, serif; font-size: 15px; color: var(–cream); margin-bottom: 8px; font-weight: 500; line-height: 1.4; }
+.iter-experts { font-family: ‘Noto Serif TC’, serif; font-style: italic; font-size: 12.5px; color: var(–madder); line-height: 1.5; }
+
+.case-output { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; padding-top: 32px; border-top: 1px solid var(–border); }
+@media (max-width: 640px) { .case-output { grid-template-columns: 1fr; gap: 32px; } }
+.output-block h4 { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(–stone); margin-bottom: 16px; font-weight: 500; }
+.output-block p { font-family: ‘Noto Serif TC’, serif; font-size: 14px; color: var(–cream-dim); line-height: 1.7; }
+.palette-strip { display: flex; gap: 2px; margin: 14px 0 6px; height: 32px; }
+.palette-strip span { flex: 1; display: block; }
+.palette-names { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; color: var(–stone-dim); letter-spacing: 0.12em; }
+
+.sequence { margin-bottom: 96px; }
+.sequence-header { margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(–border); }
+.sequence-header .eyebrow { margin-bottom: 24px; display: block; }
+.season-block { margin-bottom: 64px; }
+.season-header { display: flex; align-items: baseline; gap: 24px; padding-bottom: 20px; margin-bottom: 0; border-bottom: 1px solid var(–border-mid); flex-wrap: wrap; }
+.season-name { font-family: ‘Noto Serif TC’, serif; font-size: 26px; color: var(–cream); font-weight: 500; letter-spacing: -0.01em; }
+.season-range { font-family: ‘JetBrains Mono’, monospace; font-size: 11px; color: var(–bronze); letter-spacing: 0.2em; }
+.season-mood { font-family: ‘Noto Serif TC’, serif; font-style: italic; font-size: 15px; color: var(–stone); margin-left: auto; }
+@media (max-width: 640px) { .season-mood { margin-left: 0; width: 100%; } }
+
+.sequence-item { padding: 28px 0 24px; border-bottom: 1px solid var(–border); }
+.sequence-item.launch { background: linear-gradient(90deg, rgba(184,137,63,0.06) 0%, rgba(184,137,63,0) 70%); padding-left: 20px; margin-left: -20px; border-left: 2px solid var(–bronze); }
+.seq-top { display: grid; grid-template-columns: 60px 1fr auto; gap: 24px; align-items: baseline; margin-bottom: 12px; }
+@media (max-width: 768px) { .seq-top { grid-template-columns: 50px 1fr; } .seq-meta-right { grid-column: 1 / -1; padding-left: 74px; } }
+@media (max-width: 480px) { .seq-top { grid-template-columns: 1fr; gap: 8px; } .seq-meta-right { padding-left: 0 !important; } }
+.seq-num { font-family: ‘JetBrains Mono’, monospace; font-size: 11px; color: var(–gold); letter-spacing: 0.18em; padding-top: 4px; }
+.sequence-item.launch .seq-num { color: var(–bronze); font-weight: 500; }
+.seq-body { display: flex; flex-direction: column; gap: 4px; }
+.seq-title-tc { font-family: ‘Noto Serif TC’, serif; font-size: 20px; color: var(–cream); font-weight: 500; letter-spacing: -0.005em; line-height: 1.35; }
+.seq-title-en { font-family: ‘Inter’, sans-serif; font-size: 11.5px; color: var(–stone); letter-spacing: 0.06em; margin-bottom: 4px; }
+.seq-expert { font-family: ‘Noto Serif TC’, serif; font-style: italic; font-size: 13px; color: var(–madder); line-height: 1.5; }
+.seq-meta-right { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; padding-top: 4px; }
+@media (max-width: 768px) { .seq-meta-right { align-items: flex-start; flex-direction: row; gap: 16px; } }
+.seq-date { font-family: ‘JetBrains Mono’, monospace; font-size: 10.5px; color: var(–stone); letter-spacing: 0.12em; }
+.sequence-item.launch .seq-date { color: var(–gold); font-weight: 500; }
+.seq-tags { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; letter-spacing: 0.18em; color: var(–stone-dim); text-transform: uppercase; }
+.seq-tags .tag-d { color: var(–bronze); }
+.seq-hook { font-family: ‘Noto Serif TC’, serif; font-size: 14.5px; color: var(–cream-dim); line-height: 1.65; margin: 12px 0 14px; max-width: 780px; padding-left: 84px; }
+@media (max-width: 768px) { .seq-hook { padding-left: 0; } }
+.seq-steps { padding-left: 84px; display: flex; flex-direction: column; gap: 4px; }
+@media (max-width: 768px) { .seq-steps { padding-left: 0; } }
+.seq-step { display: flex; gap: 10px; font-size: 13px; color: var(–cream-dim); line-height: 1.6; padding: 2px 0; }
+.seq-step-num { font-family: ‘JetBrains Mono’, monospace; font-size: 11px; color: var(–bronze); font-weight: 500; min-width: 18px; padding-top: 2px; }
+.sequence-item.launch .seq-step-num { color: var(–gold); }
+
+.stats { display: flex; gap: 64px; padding: 32px 0 56px; flex-wrap: wrap; }
+.stat-num { font-family: ‘Noto Serif TC’, serif; font-size: 44px; color: var(–gold); font-weight: 400; letter-spacing: -0.02em; line-height: 1; }
+.stat-label { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; letter-spacing: 0.22em; color: var(–stone); text-transform: uppercase; margin-top: 10px; }
+
+.filters-wrap { margin-bottom: 40px; padding-bottom: 32px; border-bottom: 1px solid var(–border); }
+.filters { margin-bottom: 14px; }
+.filters:last-child { margin-bottom: 0; }
+.filter-group { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.filter-label { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; letter-spacing: 0.22em; color: var(–stone-dim); text-transform: uppercase; margin-right: 16px; min-width: 64px; }
+.filter { padding: 7px 14px; background: transparent; border: 1px solid var(–border-mid); color: var(–cream-dim); font-family: inherit; font-size: 12.5px; cursor: pointer; border-radius: 2px; transition: all 0.2s; letter-spacing: 0.02em; }
+.filter:hover { border-color: var(–stone); color: var(–cream); }
+.filter.active { background: var(–clay); border-color: var(–clay); color: var(–ink); }
+.count-display { font-family: ‘JetBrains Mono’, monospace; font-size: 11px; color: var(–bronze); letter-spacing: 0.18em; margin: 24px 0 20px; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 1px; background: var(–border-mid); border: 1px solid var(–border-mid); }
+@media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+.card { background: var(–ink-2); padding: 28px 26px; display: flex; flex-direction: column; transition: background 0.2s; position: relative; min-height: 340px; }
+.card::before { content: “”; position: absolute; left: 0; top: 0; bottom: 0; width: 2px; background: var(–stone-dim); opacity: 0.6; }
+.card[data-domain=“食”]::before, .card[data-domain=“育”]::before { background: var(–clay); }
+.card[data-domain=“衣”]::before, .card[data-domain=“樂”]::before { background: var(–madder); }
+.card[data-domain=“住”]::before, .card[data-domain=“安”]::before { background: var(–bronze); }
+.card[data-domain=“行”]::before, .card[data-domain=“跨域”]::before { background: var(–gold); }
+.card:hover { background: var(–ink-3); }
+
+.card-tags { display: flex; gap: 8px; margin-bottom: 18px; font-family: ‘JetBrains Mono’, monospace; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; align-items: center; }
+.tag-domain { color: var(–bronze); font-weight: 500; }
+.tag-scale { color: var(–stone); }
+.tag-sep { color: var(–stone-dim); }
+.card[data-domain=“食”] .tag-domain, .card[data-domain=“育”] .tag-domain { color: var(–clay); }
+.card[data-domain=“衣”] .tag-domain, .card[data-domain=“樂”] .tag-domain { color: var(–madder); }
+.card[data-domain=“住”] .tag-domain, .card[data-domain=“安”] .tag-domain { color: var(–bronze); }
+.card[data-domain=“行”] .tag-domain, .card[data-domain=“跨域”] .tag-domain { color: var(–gold); }
+
+.card-title { font-family: ‘Noto Serif TC’, serif; font-size: 21px; font-weight: 500; line-height: 1.3; color: var(–cream); margin-bottom: 4px; letter-spacing: -0.01em; }
+.card-title-en { font-family: ‘Inter’, sans-serif; font-size: 11.5px; color: var(–stone); letter-spacing: 0.06em; margin-bottom: 16px; font-weight: 400; }
+.card-expert { font-family: ‘Noto Serif TC’, serif; font-style: italic; font-size: 13px; color: var(–madder); margin-bottom: 14px; line-height: 1.55; }
+.card-hook { font-size: 13.5px; color: var(–cream-dim); line-height: 1.65; margin-bottom: 16px; }
+.card-steps { margin-top: auto; padding-top: 14px; border-top: 1px dashed var(–border); display: flex; flex-direction: column; gap: 3px; }
+.card-step { display: flex; gap: 8px; font-size: 12px; color: var(–cream-dim); line-height: 1.55; opacity: 0.88; }
+.card-step-num { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; color: var(–bronze); font-weight: 500; min-width: 14px; padding-top: 2px; }
+.hidden { display: none; }
+
+footer { margin-top: 120px; padding-top: 48px; border-top: 1px solid var(–border); }
+.footer-meta { font-family: ‘JetBrains Mono’, monospace; font-size: 10px; letter-spacing: 0.18em; color: var(–stone-dim); text-transform: uppercase; line-height: 2; }
+.footer-meta .sig { color: var(–bronze); margin: 0 8px; }
+.footer-note { max-width: 680px; margin-top: 28px; font-family: ‘Noto Serif TC’, serif; font-style: italic; font-size: 13.5px; color: var(–stone); line-height: 1.75; }
+</style>
+
+</head>
+<body>
+<div class="container">
+
+<section class="hero">
+  <div class="hero-eyebrow">
+    EXPERIENCE LAB<span class="dot">·</span>WEEKLY ON FRIDAYS<span class="dot">·</span>V3 / 2026.04
+  </div>
+  <h1 class="hero-title">體驗實驗室<br><span class="accent">Experience Lab</span></h1>
+  <p class="hero-subtitle">每個星期五,打開一個新的自我——把日常最不起眼的角落,變成只有你能寫的田野筆記。</p>
+
+  <div class="launch-banner">
+    <div class="launch-date">FRI · 4 月 24 日</div>
+    <div class="launch-meta">LAUNCH WEEK #01 · 衣櫃考古學</div>
+    <div class="launch-cta">從你衣櫃深處那件「我哪天會再穿」的衣服開始——它早就知道你不會。</div>
+  </div>
+
+  <div class="hero-intro">
+    <p>承器色彩系統的成功只是序章——它證明了一件事:<strong>當你用兩位有正當性的專家輪流訪問一個人,你會看到他自己沒整理過的那一面。</strong></p>
+    <p>從 4 月 24 日(週五)開始,一年 52 個星期五,52 個把日常陌生化的小實驗。每題最多三個操作步驟,週五釋出、週末完成、下個週五再打開新的一題——沒有壓力、沒有追蹤表、沒有打卡。只是給自己每週一次被認真觀察的機會。</p>
+  </div>
+
+  <div class="dna-grid">
+    <div>
+      <div class="dna-num">DNA 01</div>
+      <div class="dna-title">雙專家對話</div>
+      <div class="dna-desc">兩個領域交叉訪問同一個主題,擠出單一專家看不到的立體感——像一面多角度的鏡子。</div>
+    </div>
+    <div>
+      <div class="dna-num">DNA 02</div>
+      <div class="dna-title">三步就能開始</div>
+      <div class="dna-desc">每一題都有三個(以下)操作步驟。手機上就能做,廚房裡也能做,通勤時也能做——不需要正襟危坐。</div>
+    </div>
+    <div>
+      <div class="dna-num">DNA 03</div>
+      <div class="dna-title">週五的儀式</div>
+      <div class="dna-desc">每週五釋出一題,週末完成——你需要的不是紀律,是節奏。一年後,你會擁有一份 52 張肖像的自我檔案。</div>
+    </div>
+  </div>
+</section>
+
+<section class="case-study">
+  <div class="case-eyebrow">VALIDATION CASE<span style="color: var(--stone-dim); margin: 0 10px;">·</span>驗證原型</div>
+  <h2 class="case-title"><span class="cn">承器</span> · Chéng Qì Color System</h2>
+  <div class="case-subtitle">
+    PERSONAL BRAND COLOR SYSTEM<span style="color: var(--stone-dim); margin: 0 8px;">·</span>2026.04<span style="color: var(--stone-dim); margin: 0 8px;">·</span>LIVE AT <a href="https://chengqi-brand.vercel.app" target="_blank">chengqi-brand.vercel.app</a>
+  </div>
+
+  <p class="case-lead">
+    這整套方法論的第一個完整驗證案例。四輪雙專家對話、從對外定位跑到心理深處——最後萃出七色、三層時態的個人品牌色彩系統。一人自述會遺漏,單一專家問會單向;兩個專家交叉對話,才擠得出那個「還沒被整理過的自己」。
+  </p>
+
+  <div class="case-iterations">
+    <div class="iteration">
+      <div class="iter-label">V1 · 對外定位</div>
+      <div class="iter-theme">市場辨認的你</div>
+      <div class="iter-experts">品牌策略師 × 色彩心理學家</div>
+    </div>
+    <div class="iteration">
+      <div class="iter-label">V2 · 對內哲學</div>
+      <div class="iter-theme">面對自己的你</div>
+      <div class="iter-experts">榮格分析師 × 佛學心理學家</div>
+    </div>
+    <div class="iteration">
+      <div class="iter-label">V3 · 時間合成</div>
+      <div class="iter-theme">過去、現在、未來的你</div>
+      <div class="iter-experts">生命歷程研究者 × 時間哲學家</div>
+    </div>
+    <div class="iteration">
+      <div class="iter-label">V3.1 · 心理精修</div>
+      <div class="iter-theme">心理層深化</div>
+      <div class="iter-experts">HSP 研究者 × 跨文化宗教學家</div>
+    </div>
+  </div>
+
+  <div class="case-output">
+    <div class="output-block">
+      <h4>PALETTE OUTPUT · 七色系統</h4>
+      <div class="palette-strip">
+        <span style="background: #1B1612;"></span>
+        <span style="background: #EDE4D3;"></span>
+        <span style="background: #8B7E6B;"></span>
+        <span style="background: #A0604A;"></span>
+        <span style="background: #9B3831;"></span>
+        <span style="background: #B8893F;"></span>
+        <span style="background: #D9BC7A;"></span>
+      </div>
+      <div class="palette-names">墨玄 · 亞麻白 · 石溫 · 陶土 · 茜紅 · 銅璽 · 曦金</div>
+      <p style="margin-top: 14px;">三層時態結構——過去 3 色承接十年合規基礎、現在 2 色標示此刻的信念與行動、未來 2 色指向下一個十年的思想領導空間。</p>
+    </div>
+    <div class="output-block">
+      <h4>METHODOLOGICAL PROOF · 方法學證明</h4>
+      <p>四輪迭代暴露了三個只能透過對話才會浮現的洞察:職涯起點的精確校準(2014.8 而非泛稱「十年前」)、信仰敘事的跨傳統重構(不是媽祖單一傳統,是慈悲哲學)、以及高敏人子類型的學理錨定(HSE × SPS 外向子群)。都不是「我本來就知道」的內容,是對話逼出來的。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sequence">
+  <div class="sequence-header">
+    <div class="eyebrow">ANNUAL SEQUENCE<span class="dot">·</span>52 FRIDAYS<span class="dot">·</span>APR 24 2026 — APR 16 2027</div>
+    <h2 class="section-title">52 個星期五 <span class="accent">52 Fridays, 52 Selves</span></h2>
+    <p class="section-lead">
+      從 4 月 24 日(週五)開跑。每週五一題,週末完成,隔週五再翻新——一年後你手上會有 52 張只有你能寫的自我肖像。情緒弧線從初夏的輕盈,經過盛夏的感官、秋冬的深潛,最終在春回的整合裡收束——末尾 4 月 16 日的「未來的你寫回來的信」正好落在週年當週,讓整個循環有首尾相接的儀式感。
+    </p>
+  </div>
+
+  <div class="season-block">
+    <div class="season-header">
+      <span class="season-name">初夏</span>
+      <span class="season-range">APR 24 — JUL 17 · 13 FRI · W01–13</span>
+      <span class="season-mood">啟程與好奇 · Warm-up</span>
+    </div>
+
+```
+<div class="sequence-item launch">
+  <div class="seq-top">
+    <div class="seq-num">#01</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">衣櫃考古學</div>
+      <div class="seq-title-en">Wardrobe Archaeology</div>
+      <div class="seq-expert">時尚史家 × 物質文化學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">APR 24 FRI · 啟動週</div>
+      <div class="seq-tags"><span class="tag-d">衣</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">衣櫃深處那些「我哪天會再穿」的衣服——它們早就知道你不會。今天輪到它們說話。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>拍下衣櫃裡 10 件「壓箱底」的衣物(超過 5 年沒穿也沒丟)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>挑 3 件最讓你意外的,寫下「為什麼到現在還捨不得丟」</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>把它們交給雙專家對話,生成一張只屬於你的衣櫃田野卡</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#02</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">你的角落</div>
+      <div class="seq-title-en">Your Spot</div>
+      <div class="seq-expert">空間現象學家 × 棲居研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">MAY 01 FRI</div>
+      <div class="seq-tags"><span class="tag-d">住</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">家裡那一平方公尺——不是你選的,是它選了你。它比你本人更像你。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>拍下你每天最常待超過 10 分鐘的那個角落(不整理、原狀)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>列出那裡的 5 個物件 + 每個物件的一句故事</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,萃出你的「靈魂比例模型」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#03</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">3am Playlist</div>
+      <div class="seq-title-en">3am Playlist</div>
+      <div class="seq-expert">深夜音樂學家 × 憂鬱詩學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">MAY 08 FRI</div>
+      <div class="seq-tags"><span class="tag-d">樂</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">凌晨三點才敢點開的那份歌單——沒有觀眾的你,才是你。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出你失眠或心情低時才會點開的 5–10 首歌</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>為每首寫一句「為什麼只在這種時候聽」</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,生成你的 3am 聲景註解卡</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#04</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">餐桌地圖學</div>
+      <div class="seq-title-en">Tablescape Cartography</div>
+      <div class="seq-expert">地理學家 × 回憶錄作家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">MAY 15 FRI</div>
+      <div class="seq-tags"><span class="tag-d">食</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你吃過的「那一頓改變你的飯」——每一頓都有座標。你的味覺記憶,是一張世界地圖。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出 7 頓人生「決定性的一餐」(從便利商店到米其林都算)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每頓標註:城市、同桌誰、這頓飯改變了你什麼</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,繪出你的味覺世界地圖</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#05</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">那條固定路線</div>
+      <div class="seq-title-en">Your Commute</div>
+      <div class="seq-expert">日常微觀察家 × 都市詩人</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">MAY 22 FRI</div>
+      <div class="seq-tags"><span class="tag-d">行</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你每天走的那條路——沿途有三個東西,你從沒真正看過。熟悉,本身就是一種失明。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>選一段你每天必走的路線(回家、通勤、散步都算)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>明天走時,刻意拍下 3 個你以前沒注意的細節</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,解碼這條熟視無睹之路</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#06</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">書架 DNA</div>
+      <div class="seq-title-en">Bookshelf Genome</div>
+      <div class="seq-expert">圖書館學家 × 個人知識考古學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">MAY 29 FRI</div>
+      <div class="seq-tags"><span class="tag-d">住</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">書架上那本從沒翻開的書——是你想成為的某個人的替身。你的未完成清單,就是你。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>拍下書架上 3 本書:最貴的、最舊的、從沒讀完的</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>為每本寫一句「它代表了哪個版本的我」</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,畫出你的閱讀 DNA 圖譜</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#07</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">笑點譜系</div>
+      <div class="seq-title-en">Humor Lineage</div>
+      <div class="seq-expert">喜劇人類學家 × 家族文化史家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JUN 05 FRI</div>
+      <div class="seq-tags"><span class="tag-d">樂</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你笑得最大聲的那個記憶——它告訴你你屬於誰。笑,是最親密的結盟。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>回想 3 個你笑到停不下來的真實場景</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>標註:跟誰在一起?為什麼只在那裡敢那樣笑?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,繪出你的笑點家族樹</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#08</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">Comfort Drink 光譜</div>
+      <div class="seq-title-en">Comfort Drink Spectrum</div>
+      <div class="seq-expert">飲食人類學家 × 情緒生理學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JUN 12 FRI</div>
+      <div class="seq-tags"><span class="tag-d">食</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">一天七個時段、七種液體、七個不同的你——每一杯都在回應一種特定的情緒。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出你一天不同時段想喝的 7 種液體(咖啡、酒、茶、水⋯)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每杯旁邊標一個情緒(焦慮?慶祝?逃避?)</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,生成你的液體情緒光譜</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#09</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">辦公桌考古學</div>
+      <div class="seq-title-en">Desk Archaeology</div>
+      <div class="seq-expert">考古學家 × 辦公人類學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JUN 19 FRI · 首次雙玩</div>
+      <div class="seq-tags"><span class="tag-d">跨域</span> · 雙玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">別人的桌面,比你想像的更誠實——它是一份沒寫成自傳的自傳。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>找一位同事互換桌面照片(近距離、不整理)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>各自寫下對方桌上物件揭露的 3 件事</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>一起丟給雙專家對話,各自拿到一張桌面分析卡</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#10</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">步行韻律學</div>
+      <div class="seq-title-en">Walking Rhythmics</div>
+      <div class="seq-expert">漫遊文學家 × 神經運動學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JUN 26 FRI</div>
+      <div class="seq-tags"><span class="tag-d">行</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你走路的樣子——比你的口音更能出賣你。每個人都有自己的步態指紋。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>請家人朋友偷偷錄一段你走路的背影(10 秒)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>自己看:你的節奏、姿態、速度,像哪種動物?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,寫出你的「步態指紋」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#11</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">你的私人菜單</div>
+      <div class="seq-title-en">Plate Philosophy</div>
+      <div class="seq-expert">米其林主廚 × 文化人類學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JUL 03 FRI</div>
+      <div class="seq-tags"><span class="tag-d">食</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你願意為誰下廚?那個名單,就是一份比履歷還準的身分證。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出 3 道 comfort food、3 道絕對不吃、1 道為誰都想做的菜</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>寫下每道菜的「故事來源」</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,生成你的七道菜個人身分菜單</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#12</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">最多次的那部電影</div>
+      <div class="seq-title-en">Most Re-watched Film</div>
+      <div class="seq-expert">電影人類學家 × 情感鏡像研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JUL 10 FRI</div>
+      <div class="seq-tags"><span class="tag-d">樂</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">那部你看了 N 次的電影——它是一面你怎麼看都不膩的鏡子。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>寫下你看過最多次的那部電影(至少 3 次)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>列出每次重看你注意到的不同細節</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,解碼你為什麼不斷回去看它</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#13</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">週末人格</div>
+      <div class="seq-title-en">Weekend Persona</div>
+      <div class="seq-expert">身份切換研究者 × 勞動節奏學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JUL 17 FRI</div>
+      <div class="seq-tags"><span class="tag-d">樂</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">週一的你跟週六下午三點的你——是同一個人嗎?還是兩個都是表演?</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>寫下你週一到週五會做的 3 件事(具體行為)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>寫下你週末才會做的 3 件事(不是「休息」——具體行為)</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,比較兩個版本的你</div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <div class="season-block">
+    <div class="season-header">
+      <span class="season-name">盛夏</span>
+      <span class="season-range">JUL 24 — OCT 16 · 13 FRI · W14–26</span>
+      <span class="season-mood">身體與玩 · Sensory Play</span>
+    </div>
+
+```
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#14</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">質料自傳</div>
+      <div class="seq-title-en">Fabric Autobiography</div>
+      <div class="seq-expert">觸覺現象學家 × 身體記憶研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JUL 24 FRI</div>
+      <div class="seq-tags"><span class="tag-d">衣</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">皮膚永遠比語言誠實——你最愛的那種觸感,偷偷指向了你童年的某一天。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>閉眼摸衣櫃:哪種質料讓你第一時間想穿?</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>寫下 3 種你完全受不了的質料 + 原因</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,追溯這些觸覺偏好的源頭</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#15</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">遊戲人類學</div>
+      <div class="seq-title-en">Play Anthropology</div>
+      <div class="seq-expert">童年遊戲研究者 × 兒童想像力學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JUL 31 FRI</div>
+      <div class="seq-tags"><span class="tag-d">樂</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你小時候自創的那個遊戲——是你第一本沒寫成的哲學書。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>回想你 8–12 歲自創過的一個遊戲</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>寫下規則、參與者、你為什麼這樣設計</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,翻譯這遊戲在你身上留下了什麼</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#16</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">兩人之間的一行詩</div>
+      <div class="seq-title-en">Between Us</div>
+      <div class="seq-expert">對方視角詩人 × 關係觀察者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">AUG 07 FRI</div>
+      <div class="seq-tags"><span class="tag-d">跨域</span> · 雙玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">對方看到的你,可能比你看到的你還準——這次讓他們用一行詩送回給你。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>找一位夥伴,兩人各答 7 道快問快答</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>把對方的回答交給雙專家,請它以「你眼中的對方」視角寫一行詩</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>互相讀給彼此聽——不解釋、不辯論,只接住</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#17</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">迷路的地理學</div>
+      <div class="seq-title-en">Geography of Getting Lost</div>
+      <div class="seq-expert">迷路研究者 × 心理地理學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">AUG 14 FRI</div>
+      <div class="seq-tags"><span class="tag-d">行</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">所有的迷路,其實都是一次不期而遇的發現——只是當時你還沒意識到。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>寫下你人生最難忘的一次迷路</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>描述:那時你看到了什麼不該看到的?感受到什麼不該感受的?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,把那次迷路轉譯成你的人生注腳</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#18</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">家的聲音地圖</div>
+      <div class="seq-title-en">Home Acoustic Map</div>
+      <div class="seq-expert">聲景研究者 × 家屋心理學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">AUG 21 FRI</div>
+      <div class="seq-tags"><span class="tag-d">住</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你家哪一個房間最靜、哪一個最吵、你逃到哪一個?聲音分布,就是情緒分布。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>連續一週,記錄家中每個空間的「主題聲音」</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>標註哪裡讓你放鬆、哪裡讓你焦慮</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,畫出你的家屋情緒聲景圖</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#19</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">飯友配對</div>
+      <div class="seq-title-en">Dinner Soulmate</div>
+      <div class="seq-expert">社會學家 × 款待學者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">AUG 28 FRI</div>
+      <div class="seq-tags"><span class="tag-d">食</span> · 雙玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你願意邀請誰吃飯——那份 guest list,是你的社交哲學的精裝版。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>兩人各寫一份「理想晚餐」6 人 guest list(可邀生者/逝者/虛構人物)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>交換清單,互問:為什麼是這 6 個?為什麼不是別人?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,生成兩人各自的「餐桌社交星座」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#20</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">季節偏愛</div>
+      <div class="seq-title-en">Seasonal Self</div>
+      <div class="seq-expert">節氣心理學家 × 生理節奏研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">SEP 04 FRI</div>
+      <div class="seq-tags"><span class="tag-d">樂</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你跟哪個季節的哪一週是摯友?跟哪個有宿怨?你的身體,記得日光的配方。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出春夏秋冬每季你最喜歡與最排斥的那一週</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>寫下每個選擇背後的感官記憶(光、味、溫、聲)</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,解碼你的生理節氣人格</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#21</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">車窗外的詩</div>
+      <div class="seq-title-en">Window Poetry</div>
+      <div class="seq-expert">移動觀察家 × 短詩寫作家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">SEP 11 FRI</div>
+      <div class="seq-tags"><span class="tag-d">行</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">長途列車窗外——那些你想下車卻沒下的站,通常才是你真正在找的。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>回想最近一次長程移動(高鐵、火車、飛機、客運)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>寫下 3 個你經過但想再回去的站或景色</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,把這些「沒下車」轉譯成你的未選之路</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#22</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">交通工具情感圖</div>
+      <div class="seq-title-en">Transit Emotion Graph</div>
+      <div class="seq-expert">移動人類學家 × 情緒地理學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">SEP 18 FRI</div>
+      <div class="seq-tags"><span class="tag-d">行</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你坐高鐵像什麼人?坐捷運又像什麼人?車廂裡的你,是哪個版本的你?</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出你常用的 5 種交通工具</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每種旁邊寫一個形容詞(焦慮、躁動、放空、歸心⋯)</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,定義你的「移動人格光譜」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#23</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">Mise en place 人格</div>
+      <div class="seq-title-en">Prep Personality</div>
+      <div class="seq-expert">法式烹飪教師 × 工作風格研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">SEP 25 FRI</div>
+      <div class="seq-tags"><span class="tag-d">食</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">廚房是最誠實的實驗室——你切菜的順序,透露了你是什麼思考者。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>下次做飯時錄一段影片:從洗菜到上桌</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>事後看:你是先擺齊再動?還是邊做邊調?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,把「廚房節奏」翻譯成你的工作風格</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#24</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">你的聲景</div>
+      <div class="seq-title-en">Sound Portrait</div>
+      <div class="seq-expert">聲學設計師 × 存在心理學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">OCT 02 FRI</div>
+      <div class="seq-tags"><span class="tag-d">樂</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">七軌人生聲帶——初戀的白噪音、童年廚房的節奏、心碎的雨。都在你身上留了拷貝。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出 7 個你記得最深的聲音記憶(不是歌,是環境音)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每個標註:時間、地點、為什麼你還記得</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,合成你的「人生 7 軌聲景專輯」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#25</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">我們的嗅覺自傳</div>
+      <div class="seq-title-en">Olfactory Autobiography</div>
+      <div class="seq-expert">嗅覺民族誌學家 × 氣味記憶研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">OCT 09 FRI · 首次團玩</div>
+      <div class="seq-tags"><span class="tag-d">跨域</span> · 團玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">一個團隊的氣味族譜——外婆的衣櫃、某個下午的教室、某個國家的清晨。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>團隊每人提交一段氣味記憶(匿名亦可)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>彙整後把全隊的氣味記憶交給雙專家</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>生成團隊的「集體嗅覺族譜」海報,印出來貼牆</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#26</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">影子職業互解</div>
+      <div class="seq-title-en">Shadow Career Trade</div>
+      <div class="seq-expert">職涯考古學家 × 未實現自我研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">OCT 16 FRI</div>
+      <div class="seq-tags"><span class="tag-d">跨域</span> · 雙玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">那個你偷偷想做但從沒說出口的工作——今天換它出場。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>兩人各自坦白一個 shadow career(烘焙師、燈塔守望人、詩人⋯)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>互問:為什麼是這個?你身上哪塊因此沒被活出來?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,各自拿到一張「未活出自我」剖析卡</div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <div class="season-block">
+    <div class="season-header">
+      <span class="season-name">秋冬</span>
+      <span class="season-range">OCT 23 — JAN 15 · 13 FRI · W27–39</span>
+      <span class="season-mood">連結與深潛 · Descending</span>
+    </div>
+
+```
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#27</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">顏色禁忌</div>
+      <div class="seq-title-en">Color Taboos</div>
+      <div class="seq-expert">色彩心理學家 × 家族治療師</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">OCT 23 FRI</div>
+      <div class="seq-tags"><span class="tag-d">衣</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你絕對不穿的那三個顏色——它們在迴避哪個版本的你?</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>寫下你絕對不穿的 3 個顏色</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>為每個顏色追溯:誰說過你?童年哪段故事?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,解鎖這些顏色背後的家族劇本</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#28</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">穿給誰看</div>
+      <div class="seq-title-en">Who Do You Dress For</div>
+      <div class="seq-expert">符號學家 × 關係心理學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">OCT 30 FRI</div>
+      <div class="seq-tags"><span class="tag-d">衣</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你早上選衣服時——不自覺在對誰說話?衣服永遠有個收件人。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>連續 5 天,每天出門前寫下:今天想看起來像什麼樣子</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>整理:這些版本的你,是給哪些觀眾看的?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,列出你衣服的「隱形收件人」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#29</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">你的老師們</div>
+      <div class="seq-title-en">Your Teachers</div>
+      <div class="seq-expert">意外教育學家 × 日常智慧採集者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">NOV 06 FRI</div>
+      <div class="seq-tags"><span class="tag-d">育</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">不是學校那種老師——是那個計程車司機、那個對手、那個孩子。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>寫下 3 個「不是老師的老師」(意外教會你某件事的人)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>具體寫:他們說了什麼/做了什麼?你學到什麼?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,編成你的「日常智慧族譜」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#30</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">壞品味自首</div>
+      <div class="seq-title-en">Bad Taste Confession</div>
+      <div class="seq-expert">流行文化評論家 × 愉悅心理學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">NOV 13 FRI</div>
+      <div class="seq-tags"><span class="tag-d">衣</span> · 雙玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你偷偷喜歡但不敢讓別人知道的風格——今天兩個人互相解密。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>兩人各寫一份「壞品味清單」(爛片、芭樂歌、登不上大雅的風格)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>面對面讀出來——不轉文字、不配解釋</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>一起交給雙專家對話,互相解碼彼此的「guilty taste」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#31</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">兩次以上的地方</div>
+      <div class="seq-title-en">Return Places</div>
+      <div class="seq-expert">旅行心理學家 × 記憶建築師</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">NOV 20 FRI</div>
+      <div class="seq-tags"><span class="tag-d">行</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">那些你「還要再去」的地方——是你最誠實的偏愛,勝過任何履歷。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出你主動回訪過 2 次以上的 5 個地方(任意規模)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每個寫一句:它治癒你什麼?你在那裡卸下什麼?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,繪出你的「回訪心理地圖」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#32</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">口頭禪考古</div>
+      <div class="seq-title-en">Catchphrase Archaeology</div>
+      <div class="seq-expert">個人語言學家 × 焦慮史家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">NOV 27 FRI</div>
+      <div class="seq-tags"><span class="tag-d">育</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你每個人生階段的口頭禪——是當時的你,焦慮的化石。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>回想 3 個人生階段(求學/首份工作/現在)最常掛在嘴邊的話</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每個口頭禪問自己:那時我在焦慮什麼?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,整理你語言化石的地層切面</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#33</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">一天裡的人格切換</div>
+      <div class="seq-title-en">Intraday Persona</div>
+      <div class="seq-expert">晝夜節律學家 × 多重自我研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">DEC 04 FRI</div>
+      <div class="seq-tags"><span class="tag-d">跨域</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">早上的你跟晚上的你——哪一個會做你後來後悔的決定?</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>連續 3 天,早中晚各記一個當下的情緒 / 想法</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>比較:哪個時段的你最容易衝動?最誠實?最柔軟?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,標註你的「晝夜人格切換點」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#34</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">週日下午症候群</div>
+      <div class="seq-title-en">Sunday Afternoon Syndrome</div>
+      <div class="seq-expert">時間感研究者 × 憂鬱精神分析</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">DEC 11 FRI</div>
+      <div class="seq-tags"><span class="tag-d">樂</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">週日下午三點那種說不出來的空無感——你跟它,認識多久了?</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>下個週日下午 3–5 點,如實記錄你的情緒、身體、想做什麼</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>寫下:這種感受從幾歲開始有?跟什麼有關?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,解剖你的「週日憂鬱 DNA」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#35</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">最後一次大笑</div>
+      <div class="seq-title-en">Last Big Laugh</div>
+      <div class="seq-expert">日常幸福研究者 × 笑聲現象學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">DEC 18 FRI</div>
+      <div class="seq-tags"><span class="tag-d">樂</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你最後一次笑到停不下來——是什麼時候?如果超過一個月以上記不起來,那本身就是個訊息。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>回想最近一次真正的大笑(不是禮貌笑、應酬笑)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>寫下:時間、地點、誰在旁邊、為什麼好笑</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,分析你的「大笑配方」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#36</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">獨處時的秘密儀式</div>
+      <div class="seq-title-en">Solo Ritual</div>
+      <div class="seq-expert">獨處現象學家 × 私密行為研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">DEC 25 FRI · 聖誕節</div>
+      <div class="seq-tags"><span class="tag-d">樂</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">沒有觀眾的你——才是你。聖誕夜這天,跟自己好好過。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>寫下你家裡沒人時,真正會做的 3 件事(不是告訴別人的那些)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每個儀式問:為什麼這件事必須獨處才能做?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,為這些儀式命名與祝福</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#37</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">重讀的書</div>
+      <div class="seq-title-en">Re-read Ritual</div>
+      <div class="seq-expert">閱讀現象學家 × 時間哲學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JAN 01 2027 · 元旦</div>
+      <div class="seq-tags"><span class="tag-d">育</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">新年第一天——你重讀過的那本書,每次看到的都是不同的你。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出你重讀過 3 次以上的一本書或電影</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>畫一個時間軸:每次重讀時你幾歲?看到了什麼?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,寫出你與這文本的「共同成長筆記」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#38</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">廚房的物件傳記</div>
+      <div class="seq-title-en">Kitchen Object Biography</div>
+      <div class="seq-expert">物質文化學家 × 家傳記作家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JAN 08 FRI</div>
+      <div class="seq-tags"><span class="tag-d">食</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">那支用了十年的木匙——比你家一半的朋友都還認識你。今天輪到它接受採訪。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>從廚房挑 3 件用超過 3 年的工具(木匙、鑄鐵鍋、圍裙⋯)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>為每件寫一句「它見證過你什麼時刻」</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,寫出這 3 件物件的傳記</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#39</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">窗景地理學</div>
+      <div class="seq-title-en">Window View Geography</div>
+      <div class="seq-expert">地景建築師 × 生命歷程研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JAN 15 FRI</div>
+      <div class="seq-tags"><span class="tag-d">住</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你住過的每一扇窗外的景觀——它們在你不注意時,畫了你內在的地平線。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出你一生住過的家,每個家窗外的景色(依時間排序)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每個景色寫一句:它當時成為你的什麼背景音?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,拼合你的「窗景人生地形圖」</div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <div class="season-block">
+    <div class="season-header">
+      <span class="season-name">春回</span>
+      <span class="season-range">JAN 22 — APR 16 · 13 FRI · W40–52</span>
+      <span class="season-mood">收束與整合 · Integration</span>
+    </div>
+
+```
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#40</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">物件的罪咎</div>
+      <div class="seq-title-en">Object Guilt</div>
+      <div class="seq-expert">物質文化學家 × 心理治療師</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JAN 22 FRI</div>
+      <div class="seq-tags"><span class="tag-d">住</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">家裡那些留著卻不愛、不用卻不敢丟的物品——罪咎本身,就是一份清單。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>找出家裡讓你最內疚的 5 件留著的物品</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每件寫:誰給的/何時買的/為什麼不敢丟</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,寫出你的「罪咎物件地圖」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#41</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">搬家考古</div>
+      <div class="seq-title-en">Moving Archaeology</div>
+      <div class="seq-expert">人類學家 × 生命儀式研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">JAN 29 FRI</div>
+      <div class="seq-tags"><span class="tag-d">住</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你每次搬家「帶」與「丟」的那條分界線——就是你的價值觀進化史。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出你一生搬過的家,每次「留下的重要物品」與「丟掉的物品」</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>觀察:分界線如何隨時間移動?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,繪出你的「價值觀演化時間軸」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#42</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">被騙過的哲學</div>
+      <div class="seq-title-en">Philosophy of Being Fooled</div>
+      <div class="seq-expert">認知心理學家 × 信任研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">FEB 05 FRI</div>
+      <div class="seq-tags"><span class="tag-d">育</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">每一次被騙,都是你願意相信什麼的證據——那個「願意」,比受騙本身更值得看。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>寫下你被騙得最深的一次(不只錢——感情、資訊、幻想都算)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>反問:當時你最想相信什麼是真的?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,翻譯你的「受騙哲學」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#43</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">最沒用的學習</div>
+      <div class="seq-title-en">Most Useless Learning</div>
+      <div class="seq-expert">無用之用學者 × 傳記作家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">FEB 12 FRI · 農曆春節</div>
+      <div class="seq-tags"><span class="tag-d">育</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你學過最「沒用」的那件事——二十年後才發現,它才是構成你的骨架。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出 3 件你曾經被說「沒用」卻還是學過的事</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每件寫:它後來變成了什麼?沒有它你會少掉什麼?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,證明你的「無用之用」定理</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#44</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">技能墓園</div>
+      <div class="seq-title-en">Skill Graveyard</div>
+      <div class="seq-expert">記憶運動學家 × 技藝考古學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">FEB 19 FRI</div>
+      <div class="seq-tags"><span class="tag-d">育</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">那些你曾經很擅長、現在已荒廢的技能——它們不一定死了,可能只是在等。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>列出 5 個你曾會、現在已放棄的技能(樂器、語言、遊戲⋯)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每個技能問:為什麼停下來?想不想回去?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,為每個技能立一塊「墓誌銘 or 復活卡」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#45</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">戰袍演進史</div>
+      <div class="seq-title-en">Battle Uniform</div>
+      <div class="seq-expert">表演服裝設計師 × 場合心理學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">FEB 26 FRI</div>
+      <div class="seq-tags"><span class="tag-d">衣</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你人生每個重要場合的戰袍——衣物是外骨骼,它們替你說了沒說出口的話。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>回想 5 個重要場合(第一次面試、告白、演講、婚禮、告別式)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>記下你那天穿什麼,以及你當時想成為誰</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,寫出你的「戰袍演進簡史」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#46</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">過世的那件衣服</div>
+      <div class="seq-title-en">The Clothes That Died</div>
+      <div class="seq-expert">時尚考古家 × 哀悼研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">MAR 05 FRI</div>
+      <div class="seq-tags"><span class="tag-d">衣</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你最懷念那件已經丟掉的衣服——哀悼,不只發生在人身上。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>寫下你最想念的那件已經不在身邊的衣物</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>描述:它陪過誰、去過哪、為什麼離開</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,為它寫一篇簡短的悼文</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#47</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">影子履歷</div>
+      <div class="seq-title-en">Shadow CV</div>
+      <div class="seq-expert">敘事心理學家 × 未選之路研究者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">MAR 12 FRI</div>
+      <div class="seq-tags"><span class="tag-d">育</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">不是你做過的工作——是你放棄的、錯過的、婉拒的。「沒發生」塑造你的,比你想的多。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>寫下 5 個你曾放棄或錯過的機會(工作、升學、關係)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每個寫一行:為什麼放棄?那個決定後來怎麼影響你?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,生成你的「影子履歷」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#48</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">失敗博物館</div>
+      <div class="seq-title-en">Museum of Failure</div>
+      <div class="seq-expert">策展人 × 失敗研究學者</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">MAR 19 FRI</div>
+      <div class="seq-tags"><span class="tag-d">育</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">不是最丟臉的那些,是教會你最多的那些——為它們寫展覽說明牌。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>挑出你人生 5 個「最珍貴的失敗」</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>為每個寫一段 50 字的「展品說明牌」</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,策劃你的個人失敗博物館</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#49</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">最後一餐訪談</div>
+      <div class="seq-title-en">Last Meal Interview</div>
+      <div class="seq-expert">存在主義哲學家 × 臨終關懷心理學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">MAR 26 FRI</div>
+      <div class="seq-tags"><span class="tag-d">食</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">最後一餐想吃什麼?跟誰吃?在什麼光裡?——不是悲傷,是最深的自我揭露。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>寫下你的最後一餐菜單、同桌人、時刻與場景</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>每個選擇問一句:為什麼是這個?為什麼是他們?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,萃出這餐背後的「你之所以是你」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#50</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">身體年鑑</div>
+      <div class="seq-title-en">Body Almanac</div>
+      <div class="seq-expert">疤痕敘事學家 × 身體傳記作家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">APR 02 FRI</div>
+      <div class="seq-tags"><span class="tag-d">跨域</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">身體——是你從不提筆、卻一直在寫的日記。每一個痕跡都有故事。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>在身體上找 5 個你最熟悉的痕跡(疤、痣、紋路、傷)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>為每個寫一句:它從哪一年開始在我身上</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,整理成你的「身體年鑑」</div>
+  </div>
+</div>
+
+<div class="sequence-item">
+  <div class="seq-top">
+    <div class="seq-num">#51</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">告別的儀式學</div>
+      <div class="seq-title-en">Rituals of Goodbye</div>
+      <div class="seq-expert">過渡儀式人類學家 × 哀悼心理學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">APR 09 FRI</div>
+      <div class="seq-tags"><span class="tag-d">跨域</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">你怎麼跟事物告別——舊手機、前任、一座城市。你的告別方式,比人格測驗更準。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>回想 3 次重要告別(人、物、地都算)</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>寫下:你當時做了什麼儀式?有什麼話說了/沒說?</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>交給雙專家對話,歸納你的「告別模式」</div>
+  </div>
+</div>
+
+<div class="sequence-item launch">
+  <div class="seq-top">
+    <div class="seq-num">#52</div>
+    <div class="seq-body">
+      <div class="seq-title-tc">未來的你寫回來的信</div>
+      <div class="seq-title-en">Letter From 2037</div>
+      <div class="seq-expert">敘事心理學家 × 時間哲學家</div>
+    </div>
+    <div class="seq-meta-right">
+      <div class="seq-date">APR 16 FRI · 週年收束</div>
+      <div class="seq-tags"><span class="tag-d">跨域</span> · 獨玩</div>
+    </div>
+  </div>
+  <div class="seq-hook">一整年 51 題之後,換未來的你說話——十年後的你,有一封信正寄回給你。</div>
+  <div class="seq-steps">
+    <div class="seq-step"><span class="seq-step-num">01.</span>回頭翻閱過去 51 題的片段,挑 5 個最讓你停下來的</div>
+    <div class="seq-step"><span class="seq-step-num">02.</span>把這些線索交給雙專家,請他們扮演「十年後的你」</div>
+    <div class="seq-step"><span class="seq-step-num">03.</span>收下那封信——印出來、裱起來、夾進你的 2026 體驗年鑑</div>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<section>
+  <div class="sequence-header">
+    <div class="eyebrow">FULL BACKLOG<span class="dot">·</span>概念蓄水池</div>
+    <h2 class="section-title">完整概念庫 <span class="accent">The Full Reservoir</span></h2>
+    <p class="section-lead">
+      52 個星期五不夠用?這裡還有更多——食衣住行育樂,加上跨域與 GPS 工作場景,68 個概念自由挑選。有些沒排進今年,不是不精彩,只是還沒輪到。用下面兩組篩選找到你此刻最想打開的那一個。
+    </p>
+  </div>
+
+  <div class="stats">
+    <div>
+      <div class="stat-num">68</div>
+      <div class="stat-label">概念 Concepts</div>
+    </div>
+    <div>
+      <div class="stat-num">8</div>
+      <div class="stat-label">生活域 Domains</div>
+    </div>
+    <div>
+      <div class="stat-num">4</div>
+      <div class="stat-label">參與規模 Scales</div>
+    </div>
+    <div>
+      <div class="stat-num">52</div>
+      <div class="stat-label">已排入年度序列</div>
+    </div>
+  </div>
+
+  <div class="filters-wrap">
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">生活域</span>
+        <button class="filter active" data-filter="all" data-type="domain">全部 ALL</button>
+        <button class="filter" data-filter="食" data-type="domain">食</button>
+        <button class="filter" data-filter="衣" data-type="domain">衣</button>
+        <button class="filter" data-filter="住" data-type="domain">住</button>
+        <button class="filter" data-filter="行" data-type="domain">行</button>
+        <button class="filter" data-filter="育" data-type="domain">育</button>
+        <button class="filter" data-filter="樂" data-type="domain">樂</button>
+        <button class="filter" data-filter="跨域" data-type="domain">跨域</button>
+        <button class="filter" data-filter="安" data-type="domain">安 GPS</button>
+      </div>
+    </div>
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">規模</span>
+        <button class="filter active" data-filter="all" data-type="scale">全部</button>
+        <button class="filter" data-filter="獨玩" data-type="scale">獨玩 SOLO</button>
+        <button class="filter" data-filter="雙玩" data-type="scale">雙玩 PAIR</button>
+        <button class="filter" data-filter="團玩" data-type="scale">團玩 TEAM</button>
+        <button class="filter" data-filter="養玩" data-type="scale">養玩 LONG-ARC</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="count-display" id="countDisplay">顯示全部 68 個概念</div>
+
+  <div class="grid" id="grid">
+
+  <div class="card" data-domain="食" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">食</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">你的私人菜單</h3>
+    <div class="card-title-en">Plate Philosophy</div>
+    <div class="card-expert">米其林主廚 × 文化人類學家</div>
+    <p class="card-hook">你願意為誰下廚?那份名單,就是一份比履歷還準的身分證。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出 3 道 comfort food + 3 道不吃 + 1 道為誰都想做的菜</div>
+      <div class="card-step"><span class="card-step-num">02.</span>寫下每道菜的「故事來源」</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,生成七道菜的身分菜單</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="食" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">食</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">餐桌地圖學</h3>
+    <div class="card-title-en">Tablescape Cartography</div>
+    <div class="card-expert">地理學家 × 回憶錄作家</div>
+    <p class="card-hook">那一頓改變你的飯——每一頓都有座標。你的味覺記憶,是一張世界地圖。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出 7 頓人生「決定性的一餐」</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每頓標註:城市、同桌誰、改變了你什麼</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,繪出你的味覺世界地圖</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="食" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">食</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">廚房的物件傳記</h3>
+    <div class="card-title-en">Kitchen Object Biography</div>
+    <div class="card-expert">物質文化學家 × 家傳記作家</div>
+    <p class="card-hook">那支用了十年的木匙——比你一半的朋友都還認識你。輪到它接受採訪。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>挑 3 件用超過 3 年的廚房工具</div>
+      <div class="card-step"><span class="card-step-num">02.</span>為每件寫「它見證過你什麼時刻」</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,寫出它們的傳記</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="食" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">食</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">時代吃貨</h3>
+    <div class="card-title-en">Decade Palate</div>
+    <div class="card-expert">飲食史家 × 世代心理學家</div>
+    <p class="card-hook">你的味蕾最忠誠於哪個年代?——它透露你是哪個時代的人。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出你最愛的 10 道菜/食物</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每道標註:它大約流行於哪個年代</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,標示你的「口味世代光譜」</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="食" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">食</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">Comfort Drink 光譜</h3>
+    <div class="card-title-en">Comfort Drink Spectrum</div>
+    <div class="card-expert">飲食人類學家 × 情緒生理學家</div>
+    <p class="card-hook">一天七個時段、七種液體、七個不同的你——每一杯都在回應一種情緒。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出一天不同時段想喝的 7 種液體</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每杯旁邊標一個情緒</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,生成你的液體情緒光譜</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="食" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">食</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">Mise en place 人格</h3>
+    <div class="card-title-en">Prep Personality</div>
+    <div class="card-expert">法式烹飪教師 × 工作風格研究者</div>
+    <p class="card-hook">廚房是最誠實的實驗室——你切菜的順序,透露你是什麼思考者。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>下次做飯錄一段:從洗菜到上桌</div>
+      <div class="card-step"><span class="card-step-num">02.</span>事後看:先擺齊再動?還是邊做邊調?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,翻譯你的工作風格</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="食" data-scale="雙玩">
+    <div class="card-tags"><span class="tag-domain">食</span><span class="tag-sep">/</span><span class="tag-scale">雙玩</span></div>
+    <h3 class="card-title">飯友配對</h3>
+    <div class="card-title-en">Dinner Soulmate</div>
+    <div class="card-expert">社會學家 × 款待學者</div>
+    <p class="card-hook">你願意邀請誰吃飯?那份 guest list,是你社交哲學的精裝版。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>兩人各寫一份「理想晚餐 6 人清單」(真實/虛構都行)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>互問:為什麼是這 6 個?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,生成各自的「餐桌社交星座」</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="食" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">食</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">最後一餐訪談</h3>
+    <div class="card-title-en">Last Meal Interview</div>
+    <div class="card-expert">存在主義哲學家 × 臨終關懷心理學家</div>
+    <p class="card-hook">最後一餐想吃什麼?跟誰吃?在什麼光裡?——不是悲傷,是最深的自我揭露。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>寫下你的最後一餐菜單、同桌人、時刻場景</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每個選擇問:為什麼是這個?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,萃出背後的「你之所以是你」</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="食" data-scale="團玩">
+    <div class="card-tags"><span class="tag-domain">食</span><span class="tag-sep">/</span><span class="tag-scale">團玩</span></div>
+    <h3 class="card-title">我們的食譜書</h3>
+    <div class="card-title-en">Team Cookbook</div>
+    <div class="card-expert">料理作家 × 文化史家</div>
+    <p class="card-hook">每人一道菜配一個故事——重寫成書頁,印出來放茶水間。實體物件,可留十年。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>每位成員提交一道菜 + 故事(誰教/何時/為誰)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>彙整後交給雙專家,潤成一本小書</div>
+      <div class="card-step"><span class="card-step-num">03.</span>印刷裝訂,放在團隊共用空間</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="衣" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">衣</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">衣櫃考古學</h3>
+    <div class="card-title-en">Wardrobe Archaeology</div>
+    <div class="card-expert">時尚史家 × 物質文化學家</div>
+    <p class="card-hook">那些「我哪天會再穿」的衣服——它們早就知道你不會。今天輪到它們說話。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>拍下衣櫃裡 10 件「壓箱底」的衣物</div>
+      <div class="card-step"><span class="card-step-num">02.</span>挑 3 件最意外的,寫「為什麼還捨不得丟」</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,生成衣櫃田野卡</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="衣" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">衣</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">顏色禁忌</h3>
+    <div class="card-title-en">Color Taboos</div>
+    <div class="card-expert">色彩心理學家 × 家族治療師</div>
+    <p class="card-hook">你絕對不穿的那三個顏色——它們在迴避哪個版本的你?</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>寫下 3 個你絕對不穿的顏色</div>
+      <div class="card-step"><span class="card-step-num">02.</span>為每個顏色追溯:誰說過你?童年哪段故事?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,解鎖背後的家族劇本</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="衣" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">衣</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">戰袍演進史</h3>
+    <div class="card-title-en">Battle Uniform</div>
+    <div class="card-expert">表演服裝設計師 × 場合心理學家</div>
+    <p class="card-hook">衣物是外骨骼——它們替你說了你沒說出口的話。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>回想 5 個重要場合(面試、告白、演講、婚禮、告別式)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>記下那天穿什麼,以及你當時想成為誰</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,寫出戰袍演進簡史</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="衣" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">衣</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">過世的那件衣服</h3>
+    <div class="card-title-en">The Clothes That Died</div>
+    <div class="card-expert">時尚考古家 × 哀悼研究者</div>
+    <p class="card-hook">最懷念那件已經丟掉的衣服——哀悼,不只發生在人身上。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>寫下你最想念、已經不在身邊的一件衣物</div>
+      <div class="card-step"><span class="card-step-num">02.</span>描述:它陪過誰、去過哪、為何離開</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,為它寫一篇簡短悼文</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="衣" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">衣</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">穿給誰看</h3>
+    <div class="card-title-en">Who Do You Dress For</div>
+    <div class="card-expert">符號學家 × 關係心理學家</div>
+    <p class="card-hook">早上選衣服時——你不自覺在對誰說話?衣服永遠有個收件人。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>連續 5 天,出門前寫「今天想看起來像什麼樣子」</div>
+      <div class="card-step"><span class="card-step-num">02.</span>整理:這些版本的你,是給哪些觀眾看的?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,列出隱形收件人名單</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="衣" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">衣</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">質料自傳</h3>
+    <div class="card-title-en">Fabric Autobiography</div>
+    <div class="card-expert">觸覺現象學家 × 身體記憶研究者</div>
+    <p class="card-hook">皮膚永遠比語言誠實——你最愛的那種觸感,偷偷指向你童年的某一天。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>閉眼摸衣櫃:哪種質料讓你最想穿?</div>
+      <div class="card-step"><span class="card-step-num">02.</span>寫下 3 種受不了的質料 + 原因</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,追溯觸覺偏好的源頭</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="衣" data-scale="雙玩">
+    <div class="card-tags"><span class="tag-domain">衣</span><span class="tag-sep">/</span><span class="tag-scale">雙玩</span></div>
+    <h3 class="card-title">壞品味自首</h3>
+    <div class="card-title-en">Bad Taste Confession</div>
+    <div class="card-expert">流行文化評論家 × 愉悅心理學家</div>
+    <p class="card-hook">偷偷喜歡但不敢讓別人知道的風格——今天兩個人互相解密。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>兩人各寫一份「壞品味清單」</div>
+      <div class="card-step"><span class="card-step-num">02.</span>面對面讀出來——不轉文字、不配解釋</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,互相解碼彼此的 guilty taste</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="住" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">住</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">窗景地理學</h3>
+    <div class="card-title-en">Window View Geography</div>
+    <div class="card-expert">地景建築師 × 生命歷程研究者</div>
+    <p class="card-hook">你住過的每一扇窗外的景觀——在你不注意時,畫了你內在的地平線。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出一生住過的家,每家窗外的景色</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每景寫一句:它當時成為你的什麼背景音?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,拼合人生地形圖</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="住" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">住</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">書架 DNA</h3>
+    <div class="card-title-en">Bookshelf Genome</div>
+    <div class="card-expert">圖書館學家 × 個人知識考古學家</div>
+    <p class="card-hook">那本從沒翻開的書——是你想成為的某個人的替身。你的未完成清單,就是你。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>拍下書架上 3 本:最貴、最舊、沒讀完的</div>
+      <div class="card-step"><span class="card-step-num">02.</span>為每本寫「它代表了哪個版本的我」</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,畫出閱讀 DNA 圖譜</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="住" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">住</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">你的角落</h3>
+    <div class="card-title-en">Your Spot</div>
+    <div class="card-expert">空間現象學家 × 棲居研究者</div>
+    <p class="card-hook">那一平方公尺——不是你選的,是它選了你。它比你本人更像你。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>拍下你每天最常待超過 10 分鐘的角落(不整理)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>列出那裡 5 個物件 + 每個物件一句故事</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,萃出你的靈魂比例模型</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="住" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">住</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">家的聲音地圖</h3>
+    <div class="card-title-en">Home Acoustic Map</div>
+    <div class="card-expert">聲景研究者 × 家屋心理學家</div>
+    <p class="card-hook">哪裡最靜、哪裡最吵、你逃到哪個房間?聲音分布就是情緒分布。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>連續一週,記錄每個空間的「主題聲音」</div>
+      <div class="card-step"><span class="card-step-num">02.</span>標註:哪裡放鬆、哪裡焦慮</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,畫出家屋情緒聲景圖</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="住" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">住</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">物件的罪咎</h3>
+    <div class="card-title-en">Object Guilt</div>
+    <div class="card-expert">物質文化學家 × 心理治療師</div>
+    <p class="card-hook">留著卻不愛、不用卻不敢丟的那些物品——罪咎本身,就是一份清單。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>找出最讓你內疚卻還留著的 5 件物品</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每件寫:誰給的/何時買的/為何不敢丟</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,寫出你的罪咎物件地圖</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="住" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">住</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">搬家考古</h3>
+    <div class="card-title-en">Moving Archaeology</div>
+    <div class="card-expert">人類學家 × 生命儀式研究者</div>
+    <p class="card-hook">每次搬家「帶」與「丟」的分界線——就是你的價值觀進化史。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出搬過的家,每次「留下」與「丟掉」的重要物品</div>
+      <div class="card-step"><span class="card-step-num">02.</span>觀察:分界線如何隨時間移動?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,繪出價值觀演化時間軸</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="住" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">住</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">理想的一扇門</h3>
+    <div class="card-title-en">Ideal Doorway</div>
+    <div class="card-expert">閾限建築學家 × 儀式設計師</div>
+    <p class="card-hook">門,是內外過渡的詩——如果可以重新設計家裡那扇門,你會設計什麼?</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>想像一扇理想的門:材質、聲音、開關儀式</div>
+      <div class="card-step"><span class="card-step-num">02.</span>寫下為什麼是這個版本(不是別的)</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,解碼這扇門對你的意義</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="住" data-scale="雙玩">
+    <div class="card-tags"><span class="tag-domain">住</span><span class="tag-sep">/</span><span class="tag-scale">雙玩</span></div>
+    <h3 class="card-title">客人版的你</h3>
+    <div class="card-title-en">Guest-facing Self</div>
+    <div class="card-expert">Goffman 社會學家 × 室內設計師</div>
+    <p class="card-hook">客人來之前你會藏什麼、擺什麼?兩個版本的你——差距是什麼?</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>拍兩組照片:平日的客廳 vs 客人來之前的客廳</div>
+      <div class="card-step"><span class="card-step-num">02.</span>列出你藏起的 3 件 + 擺出的 3 件</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,解讀兩個版本的自我呈現</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="行" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">行</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">步行韻律學</h3>
+    <div class="card-title-en">Walking Rhythmics</div>
+    <div class="card-expert">漫遊文學家 × 神經運動學家</div>
+    <p class="card-hook">你走路的樣子——比你的口音更能出賣你。每個人都有自己的步態指紋。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>請家人朋友偷偷錄一段你走路的背影</div>
+      <div class="card-step"><span class="card-step-num">02.</span>自己看:節奏、姿態、速度像哪種動物?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,寫出你的步態指紋</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="行" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">行</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">交通工具情感圖</h3>
+    <div class="card-title-en">Transit Emotion Graph</div>
+    <div class="card-expert">移動人類學家 × 情緒地理學家</div>
+    <p class="card-hook">你坐高鐵像什麼人?捷運上又像什麼人?車廂裡的你,是哪個版本的你?</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出你常用的 5 種交通工具</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每種寫一個形容詞(焦慮、躁動、放空、歸心⋯)</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,定義移動人格光譜</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="行" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">行</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">迷路的地理學</h3>
+    <div class="card-title-en">Geography of Getting Lost</div>
+    <div class="card-expert">迷路研究者 × 心理地理學家</div>
+    <p class="card-hook">所有的迷路,都是一次不期而遇的發現——只是當時你還沒意識到。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>寫下人生最難忘的一次迷路</div>
+      <div class="card-step"><span class="card-step-num">02.</span>描述:那時看到/感受到了什麼不該的?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,轉譯成人生注腳</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="行" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">行</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">那條固定路線</h3>
+    <div class="card-title-en">Your Commute</div>
+    <div class="card-expert">日常微觀察家 × 都市詩人</div>
+    <p class="card-hook">你每天走的那條路——沿途有三個東西,你從沒真正看過。熟悉,本身就是一種失明。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>選一段每天必走的路線</div>
+      <div class="card-step"><span class="card-step-num">02.</span>刻意拍下 3 個以前沒注意的細節</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,解碼這條熟視無睹之路</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="行" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">行</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">兩次以上的地方</h3>
+    <div class="card-title-en">Return Places</div>
+    <div class="card-expert">旅行心理學家 × 記憶建築師</div>
+    <p class="card-hook">那些「還要再去」的地方——是你最誠實的偏愛,勝過任何履歷。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出主動回訪過 2 次以上的 5 個地方</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每個寫:它治癒你什麼?你在那裡卸下什麼?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,繪出回訪心理地圖</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="行" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">行</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">車窗外的詩</h3>
+    <div class="card-title-en">Window Poetry</div>
+    <div class="card-expert">移動觀察家 × 短詩寫作家</div>
+    <p class="card-hook">那些你想下車卻沒下的站,通常才是你真正在找的。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>回想最近一次長程移動</div>
+      <div class="card-step"><span class="card-step-num">02.</span>寫下 3 個你想再回去的站或景色</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,把「沒下車」轉譯成未選之路</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="行" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">行</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">單程票的哲學</h3>
+    <div class="card-title-en">One-Way Ticket</div>
+    <div class="card-expert">存在地理學家 × 逃逸研究者</div>
+    <p class="card-hook">如果現在可以買一張單程票到任何地方——你的「不回來」,回答了你是誰。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>假設今天能買一張單程票,寫下你想去的地方</div>
+      <div class="card-step"><span class="card-step-num">02.</span>問自己:為什麼不回來?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,解讀你的逃逸座標</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="育" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">育</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">影子履歷</h3>
+    <div class="card-title-en">Shadow CV</div>
+    <div class="card-expert">敘事心理學家 × 未選之路研究者</div>
+    <p class="card-hook">不是做過的工作——是放棄的、錯過的、婉拒的。「沒發生」塑造你的,比你想的多。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>寫下 5 個曾放棄或錯過的機會</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每個寫:為何放棄?後來怎麼影響你?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,生成你的影子履歷</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="育" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">育</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">失敗博物館</h3>
+    <div class="card-title-en">Museum of Failure</div>
+    <div class="card-expert">策展人 × 失敗研究學者</div>
+    <p class="card-hook">不是最丟臉的那些,是教會你最多的那些——為它們寫展覽說明牌。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>挑出人生 5 個「最珍貴的失敗」</div>
+      <div class="card-step"><span class="card-step-num">02.</span>為每個寫 50 字的「展品說明牌」</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,策劃你的失敗博物館</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="育" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">育</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">你的老師們</h3>
+    <div class="card-title-en">Your Teachers</div>
+    <div class="card-expert">意外教育學家 × 日常智慧採集者</div>
+    <p class="card-hook">不是學校那種老師——是那個計程車司機、那個對手、那個孩子。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>寫下 3 個「不是老師的老師」</div>
+      <div class="card-step"><span class="card-step-num">02.</span>具體寫:他們說/做了什麼?你學到什麼?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,編成日常智慧族譜</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="育" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">育</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">後悔樹狀圖</h3>
+    <div class="card-title-en">Regret Decision Tree</div>
+    <div class="card-expert">反事實心理學家 × 敘事哲學家</div>
+    <p class="card-hook">人生三個最大的岔路——另一條沒走的路上,有另一個版本的你。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>畫出 3 個人生岔路(地理/關係/職涯)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>標出「走過的路」與「沒走的路」</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,讓兩個版本的你隔空對話</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="育" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">育</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">技能墓園</h3>
+    <div class="card-title-en">Skill Graveyard</div>
+    <div class="card-expert">記憶運動學家 × 技藝考古學家</div>
+    <p class="card-hook">那些曾經很擅長、現在已荒廢的技能——它們不一定死了,可能只是在等。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出 5 個曾會、現已放棄的技能</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每個問:為何停下來?想不想回去?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,立一塊「墓誌銘 or 復活卡」</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="育" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">育</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">被騙過的哲學</h3>
+    <div class="card-title-en">Philosophy of Being Fooled</div>
+    <div class="card-expert">認知心理學家 × 信任研究者</div>
+    <p class="card-hook">每一次被騙,都是你願意相信什麼的證據——那個「願意」,比受騙本身更值得看。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>寫下被騙得最深的一次(不只錢)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>反問:當時你最想相信什麼是真的?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,翻譯你的受騙哲學</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="育" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">育</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">口頭禪考古</h3>
+    <div class="card-title-en">Catchphrase Archaeology</div>
+    <div class="card-expert">個人語言學家 × 焦慮史家</div>
+    <p class="card-hook">你每個人生階段的口頭禪——是當時的你,焦慮的化石。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>回想 3 個人生階段最常掛嘴邊的話</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每個問:那時我在焦慮什麼?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,切出語言化石地層</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="育" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">育</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">重讀的書</h3>
+    <div class="card-title-en">Re-read Ritual</div>
+    <div class="card-expert">閱讀現象學家 × 時間哲學家</div>
+    <p class="card-hook">你重讀過的那本書——每次看到的,都是不同的你。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出重讀過 3 次以上的一本書或電影</div>
+      <div class="card-step"><span class="card-step-num">02.</span>畫時間軸:每次幾歲?看到了什麼?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,寫出共同成長筆記</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="育" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">育</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">最沒用的學習</h3>
+    <div class="card-title-en">Most Useless Learning</div>
+    <div class="card-expert">無用之用學者 × 傳記作家</div>
+    <p class="card-hook">那件最「沒用」的事——二十年後發現,它才是構成你的骨架。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出 3 件曾被說「沒用」卻還是學過的事</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每件寫:它後來變成了什麼?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,證明你的無用之用定理</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="育" data-scale="養玩">
+    <div class="card-tags"><span class="tag-domain">育</span><span class="tag-sep">/</span><span class="tag-scale">養玩</span></div>
+    <h3 class="card-title">老派職人週</h3>
+    <div class="card-title-en">Artisan of the Week</div>
+    <div class="card-expert">工藝史家 × 職業人類學家</div>
+    <p class="card-hook">每週把一位同事配對給一位老派職人——讓無名貢獻者被看見。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>每週挑一位同事 + 一位老派職人(漆器師、燈塔守望人⋯)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>寫下匹配理由(50 字內)</div>
+      <div class="card-step"><span class="card-step-num">03.</span>團隊群組匿名公布,讓本人自己對號入座</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="樂" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">樂</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">你的聲景</h3>
+    <div class="card-title-en">Sound Portrait</div>
+    <div class="card-expert">聲學設計師 × 存在心理學家</div>
+    <p class="card-hook">七軌人生聲帶——初戀的白噪音、童年廚房的節奏、心碎的雨。都在你身上留了拷貝。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出 7 個最深的聲音記憶(環境音,不是歌)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每個標註:時間、地點、為何還記得</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,合成你的 7 軌聲景專輯</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="樂" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">樂</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">3am Playlist</h3>
+    <div class="card-title-en">3am Playlist</div>
+    <div class="card-expert">深夜音樂學家 × 憂鬱詩學家</div>
+    <p class="card-hook">凌晨三點才敢點開的那份歌單——沒有觀眾的你,才是你。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出失眠或心情低時才點開的 5–10 首歌</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每首寫:為何只在這種時候聽?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,生成 3am 聲景註解卡</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="樂" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">樂</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">笑點譜系</h3>
+    <div class="card-title-en">Humor Lineage</div>
+    <div class="card-expert">喜劇人類學家 × 家族文化史家</div>
+    <p class="card-hook">你笑得最大聲的那個記憶——它告訴你你屬於誰。笑,是最親密的結盟。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>回想 3 個笑到停不下來的真實場景</div>
+      <div class="card-step"><span class="card-step-num">02.</span>標註:跟誰在一起?為何只在那裡敢?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,繪出笑點家族樹</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="樂" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">樂</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">週日下午症候群</h3>
+    <div class="card-title-en">Sunday Afternoon Syndrome</div>
+    <div class="card-expert">時間感研究者 × 憂鬱精神分析</div>
+    <p class="card-hook">週日下午三點那種說不出來的空無感——你跟它,認識多久了?</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>下週日 3–5 點如實記錄情緒、身體、想做什麼</div>
+      <div class="card-step"><span class="card-step-num">02.</span>寫下:這感受從幾歲開始?跟什麼有關?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,解剖週日憂鬱 DNA</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="樂" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">樂</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">週末人格</h3>
+    <div class="card-title-en">Weekend Persona</div>
+    <div class="card-expert">身份切換研究者 × 勞動節奏學家</div>
+    <p class="card-hook">週一的你跟週六下午三點的你——是同一個人嗎?還是兩個都是表演?</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>寫下週一到週五會做的 3 件具體事</div>
+      <div class="card-step"><span class="card-step-num">02.</span>寫下週末才會做的 3 件具體事</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,比較兩個版本的你</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="樂" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">樂</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">無聊的譜系</h3>
+    <div class="card-title-en">Boredom Spectrum</div>
+    <div class="card-expert">無聊研究者 × 注意力人類學家</div>
+    <p class="card-hook">你受不了的無聊是什麼形狀?享受的無聊又是什麼?區分兩者的能力,是一種自由。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出 3 種「我會抓狂」的無聊情境</div>
+      <div class="card-step"><span class="card-step-num">02.</span>列出 3 種「我會享受」的無聊情境</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,繪出你的無聊地圖</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="樂" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">樂</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">遊戲人類學</h3>
+    <div class="card-title-en">Play Anthropology</div>
+    <div class="card-expert">童年遊戲研究者 × 兒童想像力學家</div>
+    <p class="card-hook">小時候自創的那個遊戲——是你第一本沒寫成的哲學書。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>回想 8–12 歲自創過的一個遊戲</div>
+      <div class="card-step"><span class="card-step-num">02.</span>寫下規則、參與者、為何這樣設計</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,翻譯它在你身上留下了什麼</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="樂" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">樂</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">季節偏愛</h3>
+    <div class="card-title-en">Seasonal Self</div>
+    <div class="card-expert">節氣心理學家 × 生理節奏研究者</div>
+    <p class="card-hook">你跟哪個季節的哪一週是摯友?跟哪個有宿怨?你的身體,記得日光的配方。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出每季最喜歡與最排斥的那一週</div>
+      <div class="card-step"><span class="card-step-num">02.</span>寫下每個選擇背後的感官記憶</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,解碼生理節氣人格</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="樂" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">樂</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">最多次的那部電影</h3>
+    <div class="card-title-en">Most Re-watched Film</div>
+    <div class="card-expert">電影人類學家 × 情感鏡像研究者</div>
+    <p class="card-hook">那部你看了 N 次的電影——它是一面你怎麼看都不膩的鏡子。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>寫下看過最多次的電影(至少 3 次)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>列出每次重看注意到的不同細節</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,解碼為何不斷回去看它</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="樂" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">樂</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">最後一次大笑</h3>
+    <div class="card-title-en">Last Big Laugh</div>
+    <div class="card-expert">日常幸福研究者 × 笑聲現象學家</div>
+    <p class="card-hook">最後一次笑到停不下來——如果超過一個月想不起來,那本身就是個訊息。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>回想最近一次真正的大笑</div>
+      <div class="card-step"><span class="card-step-num">02.</span>寫下:時間、地點、誰在旁邊、為何好笑</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,分析你的大笑配方</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="樂" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">樂</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">獨處時的秘密儀式</h3>
+    <div class="card-title-en">Solo Ritual</div>
+    <div class="card-expert">獨處現象學家 × 私密行為研究者</div>
+    <p class="card-hook">沒有觀眾的你——才是你。家裡沒人時你真正做的事,可能比工作更能定義你。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>寫下家裡沒人時真正會做的 3 件事</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每個儀式問:為何必須獨處才能做?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,為它們命名與祝福</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">未來的你寫回來的信</h3>
+    <div class="card-title-en">Letter From 2037</div>
+    <div class="card-expert">敘事心理學家 × 時間哲學家</div>
+    <p class="card-hook">十年後的你,根據此刻的線索,寫一封信回到現在的你手上——輕微神秘,極度治癒。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>寫下此刻你最想解決的 3 個問題/困惑</div>
+      <div class="card-step"><span class="card-step-num">02.</span>把這些交給雙專家扮演「十年後的你」</div>
+      <div class="card-step"><span class="card-step-num">03.</span>收下那封信——印出來裱起來</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">物品朋友圈</h3>
+    <div class="card-title-en">Object Friendship Circle</div>
+    <div class="card-expert">物質詩學家 × 擬人化心理學家</div>
+    <p class="card-hook">你最珍惜的十件物品——它們彼此認識嗎?如果要開派對,誰跟誰站一起?誰孤僻?</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>列出最珍惜的 10 件物品</div>
+      <div class="card-step"><span class="card-step-num">02.</span>想像它們開派對:誰跟誰親?誰躲角落?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,寫出物品社交動態</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">一天裡的人格切換</h3>
+    <div class="card-title-en">Intraday Persona</div>
+    <div class="card-expert">晝夜節律學家 × 多重自我研究者</div>
+    <p class="card-hook">早上、中午、下午、晚上的你——哪一個最容易做出後來後悔的決定?</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>連續 3 天,早中晚各記一個情緒 / 想法</div>
+      <div class="card-step"><span class="card-step-num">02.</span>比較:哪個時段最衝動?最誠實?最柔軟?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,標註晝夜人格切換點</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">感官階層</h3>
+    <div class="card-title-en">Sensory Hierarchy</div>
+    <div class="card-expert">感官人類學家 × 缺失心理學家</div>
+    <p class="card-hook">如果必須失去一個感官,會選哪個?只能保留一個呢?順序,就是一份誠實的自我清單。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>把視/聽/嗅/味/觸依「願意失去」順序排列</div>
+      <div class="card-step"><span class="card-step-num">02.</span>為每個選擇寫一句原因</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,解碼你的感官自我</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">身體年鑑</h3>
+    <div class="card-title-en">Body Almanac</div>
+    <div class="card-expert">疤痕敘事學家 × 身體傳記作家</div>
+    <p class="card-hook">身體——是你從不提筆、卻一直在寫的日記。每一個痕跡都有故事。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>在身體上找 5 個最熟悉的痕跡</div>
+      <div class="card-step"><span class="card-step-num">02.</span>為每個寫「它從哪一年開始」</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,整理成身體年鑑</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">告別的儀式學</h3>
+    <div class="card-title-en">Rituals of Goodbye</div>
+    <div class="card-expert">過渡儀式人類學家 × 哀悼心理學家</div>
+    <p class="card-hook">你怎麼跟事物告別?——告別的方式,比任何人格測驗都更準。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>回想 3 次重要告別(人、物、地都算)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>寫下:做了什麼儀式?什麼話說了/沒說?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,歸納你的告別模式</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="雙玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">雙玩</span></div>
+    <h3 class="card-title">辦公桌考古學</h3>
+    <div class="card-title-en">Desk Archaeology</div>
+    <div class="card-expert">考古學家 × 辦公人類學家</div>
+    <p class="card-hook">別人的桌面,比你想像的更誠實——它是一份沒寫成自傳的自傳。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>找同事互換桌面照片(近距離、不整理)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>各自寫下對方桌上物件揭露的 3 件事</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,拿到桌面分析卡</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="雙玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">雙玩</span></div>
+    <h3 class="card-title">兩人之間的一行詩</h3>
+    <div class="card-title-en">Between Us</div>
+    <div class="card-expert">對方視角詩人 × 關係觀察者</div>
+    <p class="card-hook">對方看到的你,可能比你看到的你還準——這次讓他們用一行詩送回給你。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>兩人各答 7 道快問快答</div>
+      <div class="card-step"><span class="card-step-num">02.</span>交給雙專家以「對方視角」各寫一行詩</div>
+      <div class="card-step"><span class="card-step-num">03.</span>互讀給彼此聽——不解釋、只接住</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="雙玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">雙玩</span></div>
+    <h3 class="card-title">影子職業互解</h3>
+    <div class="card-title-en">Shadow Career Trade</div>
+    <div class="card-expert">職涯考古學家 × 未實現自我研究者</div>
+    <p class="card-hook">你偷偷想做但從沒說出口的工作——今天換它出場。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>兩人各自坦白一個 shadow career</div>
+      <div class="card-step"><span class="card-step-num">02.</span>互問:為何是這個?你哪塊因此沒活出?</div>
+      <div class="card-step"><span class="card-step-num">03.</span>交給雙專家對話,各拿一張未活出自我剖析卡</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="團玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">團玩</span></div>
+    <h3 class="card-title">送給辦公室的一首詩</h3>
+    <div class="card-title-en">Office Poem</div>
+    <div class="card-expert">集體詩學家 × 團隊敘事研究者</div>
+    <p class="card-hook">匿名的團隊真話,織成一首集體史詩——印出來貼牆,震撼感極強。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>匿名徵集:每人 3 行關於日常辦公的真話</div>
+      <div class="card-step"><span class="card-step-num">02.</span>彙整交給雙專家,織成一首團隊史詩</div>
+      <div class="card-step"><span class="card-step-num">03.</span>印出來貼茶水間牆上</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="團玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">團玩</span></div>
+    <h3 class="card-title">我們的嗅覺自傳</h3>
+    <div class="card-title-en">Olfactory Autobiography</div>
+    <div class="card-expert">嗅覺民族誌學家 × 氣味記憶研究者</div>
+    <p class="card-hook">一個團隊的氣味族譜——外婆的衣櫃、某個下午的教室、某個國家的清晨。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>團隊每人提交一段氣味記憶(可匿名)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>彙整後交給雙專家</div>
+      <div class="card-step"><span class="card-step-num">03.</span>生成「集體嗅覺族譜」海報</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="跨域" data-scale="養玩">
+    <div class="card-tags"><span class="tag-domain">跨域</span><span class="tag-sep">/</span><span class="tag-scale">養玩</span></div>
+    <h3 class="card-title">微小的勝利</h3>
+    <div class="card-title-en">Tiny Triumphs</div>
+    <div class="card-expert">日常敘事學家 × 複利心理學家</div>
+    <p class="card-hook">一個月的每日小勝利——這週集體種了 3 樣東西、被誇 4 次、還了 2 本過期的書。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>一個月每天在群組寫一個生活小勝利(非工作)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每週交給雙專家寫敘事總結</div>
+      <div class="card-step"><span class="card-step-num">03.</span>月底印成一張「我們這個月的勝利地圖」</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="安" data-scale="獨玩">
+    <div class="card-tags"><span class="tag-domain">安 GPS</span><span class="tag-sep">/</span><span class="tag-scale">獨玩</span></div>
+    <h3 class="card-title">你的資安星座</h3>
+    <div class="card-title-en">Your Security Archetype</div>
+    <div class="card-expert">行為資安研究者 × 榮格人格原型學家</div>
+    <p class="card-hook">社交型、規則忠誠型、直覺防衛型——一張個人化資安行為原型卡,LINE 傳播力極強。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>完成 10 題資安行為小測驗</div>
+      <div class="card-step"><span class="card-step-num">02.</span>交給雙專家對話,生成你的資安原型卡</div>
+      <div class="card-step"><span class="card-step-num">03.</span>分享到 LINE 群組,跟同事比對彼此是哪一型</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="安" data-scale="養玩">
+    <div class="card-tags"><span class="tag-domain">安 GPS</span><span class="tag-sep">/</span><span class="tag-scale">養玩</span></div>
+    <h3 class="card-title">把安全帶回家</h3>
+    <div class="card-title-en">Safety Goes Home Weekly</div>
+    <div class="card-expert">家庭教育家 × 行為設計師</div>
+    <p class="card-hook">每週一個小任務——教小孩認詐騙、跟爸媽檢查 app 權限、清家庭相簿外洩連結。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>每週挑一個家人場景當小任務</div>
+      <div class="card-step"><span class="card-step-num">02.</span>完成後拍一張(去識別)記錄照</div>
+      <div class="card-step"><span class="card-step-num">03.</span>月底集結全員照片,做成「家庭資安月報」</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="安" data-scale="團玩">
+    <div class="card-tags"><span class="tag-domain">安 GPS</span><span class="tag-sep">/</span><span class="tag-scale">團玩</span></div>
+    <h3 class="card-title">資安版你</h3>
+    <div class="card-title-en">Security-Life Translation</div>
+    <div class="card-expert">符號翻譯家 × 日常比喻詩人</div>
+    <p class="card-hook">錢包 = 密碼庫、家門 = 兩步驟驗證、冰箱過期食物 = 未關閉的舊帳號。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>徵集團隊每人一個「生活—資安」比喻</div>
+      <div class="card-step"><span class="card-step-num">02.</span>交給雙專家對話,挑出最傳神的 10 組</div>
+      <div class="card-step"><span class="card-step-num">03.</span>做成 LINE sticker 與 meme 海報</div>
+    </div>
+  </div>
+
+  <div class="card" data-domain="安" data-scale="團玩">
+    <div class="card-tags"><span class="tag-domain">安 GPS</span><span class="tag-sep">/</span><span class="tag-scale">團玩</span></div>
+    <h3 class="card-title">每月一桌</h3>
+    <div class="card-title-en">Security Dinner Prompts</div>
+    <div class="card-expert">餐桌對話設計師 × 團隊文化人類學家</div>
+    <p class="card-hook">卡牌讓主管帶團隊吃飯時抽一張——嚴肅議題,包進吃飯場景。</p>
+    <div class="card-steps">
+      <div class="card-step"><span class="card-step-num">01.</span>設計 30 張資安對話卡(「講一次差點被騙的經驗」⋯)</div>
+      <div class="card-step"><span class="card-step-num">02.</span>每月發一副給各部門主管</div>
+      <div class="card-step"><span class="card-step-num">03.</span>主管帶團隊吃飯時當破冰工具</div>
+    </div>
+  </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="footer-meta">
+    <div>CHÉNG QÌ EXPERIENCE LAB<span class="sig">·</span>52 FRIDAYS ANNUAL PROGRAM V3</div>
+    <div>CURATED FOR ROCKIE LIN<span class="sig">·</span>© 2026 NARRATECT ADVISORY</div>
+    <div>LAUNCH · FRI APR 24 2026<span class="sig">·</span>METHOD VALIDATED BY <span class="sig">承器</span></div>
+  </div>
+
+  <div class="footer-note">
+    每週五打開一個角落——52 個星期後,你會擁有一本你自己寫的、沒有人寫得出來的書。
+  </div>
+</footer>
+
+</div>
+
+<script>
+  const filters = document.querySelectorAll('.filter');
+  const cards = document.querySelectorAll('.card');
+  const countDisplay = document.getElementById('countDisplay');
+  let activeDomain = 'all';
+  let activeScale = 'all';
+
+  function updateCount() {
+    const visible = Array.from(cards).filter(c => !c.classList.contains('hidden')).length;
+    const parts = [];
+    if (activeDomain !== 'all') parts.push('生活域:' + activeDomain);
+    if (activeScale !== 'all') parts.push('規模:' + activeScale);
+    const filterText = parts.length ? ' · ' + parts.join(' · ') : '';
+    countDisplay.textContent = '顯示 ' + visible + ' / 68 個概念' + filterText;
+  }
+
+  filters.forEach(filter => {
+    filter.addEventListener('click', () => {
+      const type = filter.dataset.type;
+      const value = filter.dataset.filter;
+
+      document.querySelectorAll('.filter[data-type="' + type + '"]').forEach(f => f.classList.remove('active'));
+      filter.classList.add('active');
+
+      if (type === 'domain') activeDomain = value;
+      if (type === 'scale') activeScale = value;
+
+      cards.forEach(card => {
+        const domainMatch = activeDomain === 'all' || card.dataset.domain === activeDomain;
+        const scaleMatch = activeScale === 'all' || card.dataset.scale === activeScale;
+        card.classList.toggle('hidden', !(domainMatch && scaleMatch));
+      });
+
+      updateCount();
+    });
+  });
+</script>
+
+</body>
+</html>
